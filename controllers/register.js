@@ -1,6 +1,6 @@
 let userModel = require("../models/user_info");
 let md5 = require("md5");
-const {v1:uuidv4}=require('uuid')
+const {uuid}=require('../utils/createId')
 
 module.exports = async (ctx, next) => {
   console.log("register");
@@ -23,7 +23,7 @@ module.exports = async (ctx, next) => {
       };
       console.log("注册成功");
       userModel.insertData([
-        uuidv4(),
+        uuid(),
         ctx.request.body.name,
         md5(ctx.request.body.password)
       ]);

@@ -4,20 +4,21 @@ const homeModel=require('../models/sql_home')
  * @return
  */
 //轮播图
- let getSlideShow = async (ctx, next) => {
-	try {
-		const RowDataPacket = await homeModel.getSlideShow(),
-			imgList = JSON.parse(JSON.stringify(RowDataPacket));
-		ctx.body = {
-			code:200,
-			data: {
-				imgList: imgList
-			}
-		};
-	} catch (error) {
-		console.log(error);
-	}
-};
-module.exports={
-	getSlideShow
+class homeController{
+	async getSlideShow  (ctx, next) {
+		try {
+			const RowDataPacket = await homeModel.getSlideShow(),
+				imgList = JSON.parse(JSON.stringify(RowDataPacket));
+			ctx.body = {
+				code:200,
+				data: {
+					imgList: imgList
+				}
+			};
+		} catch (error) {
+			console.log(error);
+		}
+	};
 }
+
+module.exports=new homeController()

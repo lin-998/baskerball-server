@@ -59,9 +59,10 @@ Object.values(ctx.request.files).forEach(item => {
 	})
 	.post('/postLike',  controllerPost.postLike) // 动态点赞
 	.post('/postUnlike',  controllerPost.postUnlike) // 取消点赞
+	.get('/getUserPostLike', controllerPost.getUserPostLike) // 获取用户点赞动态
 	.post('/createComment', controllerPost.createComment) // 发送评论
-
-
+	
+	
 
 console.log("router");
 

@@ -1,5 +1,5 @@
 const postModel=require('../models/sql_post ')
-const {v1:uuidv4}=require('uuid')
+const {uuid}=require('../utils/createId')
 /**
  * @param   time  时间
  * @return
@@ -13,7 +13,7 @@ class postController{
 		 const post_content = ctx.request.body.content;
 	   //   console.log(fileArr)
 	   try {
-		   const RowDataPacket = await postModel.createPost([uuidv4(),post_content,user_id,fileArr]),
+		   const RowDataPacket = await postModel.createPost([uuid(),post_content,user_id,fileArr]),
 			   imgList = JSON.parse(JSON.stringify(RowDataPacket));
 		   ctx.body = {
 			   code:200,
@@ -37,7 +37,7 @@ class postController{
 	  //   console.log(fileArr)
 	  try {
 		  const RowDataPacket = await postModel.postLike([post_id,])
-		  const RowData = await postModel.insertLike([uuidv4(),user_id,post_id])
+		  const RowData = await postModel.insertLike([uuid(),user_id,post_id])
 		  ctx.body = {
 			  code:200,
 			  data: null
@@ -73,6 +73,25 @@ class postController{
 	 };
    }
 	};
+	//获取用户点赞动态
+	async getUserPostLike(ctx, next){
+		// 1. 需要获取动态的id和评论的内容(从请求体中获取)， 用户的id(从ctx.user中获取)
+		const { user_id } = ctx.request.query;
+		// console.log(ctx.request.query)
+		try {
+			const result = await postModel.getUserPostLike(user_id);
+			ctx.body = {
+				code:200,
+				data: result 
+			};
+		  } catch (error) {
+			console.log(error);
+			ctx.body = {
+				code:500,
+				data: null
+			};
+		  }
+	  }
 	// 插入评论
 	async createComment(ctx, next){
 		// 1. 需要获取动态的id和评论的内容(从请求体中获取)， 用户的id(从ctx.user中获取)

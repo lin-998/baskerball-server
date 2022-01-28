@@ -23,7 +23,11 @@ let findUIByName = function(name) {
 	let _sql = 'SELECT id ,name ,sex,avator,place,github FROM users WHERE name = ? '
 	return query(_sql, name)
 }
-
+ //修改用户头像
+let setAvator=function(value) {
+	let _sql = "UPDATE  users SET avator= ? WHERE id = ? ;"
+	return query(_sql, value)
+}
 //修改我的信息
 let editorInfo = function(data) {
 	let _sql = ' UPDATE  users SET github = ?,website = ?,sex = ?,place = ? WHERE id = ? ; '
@@ -31,9 +35,9 @@ let editorInfo = function(data) {
 }
 
 // 通过用户id查找用户信息 users 包括密码
-let findDataByUserid = function(userid) {
+let findDataByUserId = function(value) {
 	let _sql = 'SELECT * FROM users WHERE id= ? '
-	return query(_sql, [userid])
+	return query(_sql, value)
 }
 
 // 通过用户id查找用户信息 users 包括用户名，性别，头像，最后登录时间，状态等，不包括密码
@@ -97,6 +101,7 @@ module.exports = {
 	shieldFriend,
 	editorRemark,
 	editorInfo,
-	findDataByUserid,
-	DataByName
+	findDataByUserId,
+	DataByName,
+	setAvator
 }

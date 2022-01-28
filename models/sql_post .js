@@ -60,11 +60,5 @@ class postSql {
         return query(_sql, value)
     }
 }
-// module.exports={
-//     createPost,
-//     postLike,
-//     postUnlike,
-//     deleteLike,
-//     insertLike
-// }
+
 module.exports = new postSql()

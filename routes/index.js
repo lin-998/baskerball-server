@@ -13,6 +13,7 @@ const router = require('koa-router')(),
 	controllerHome=require('../controllers/controller_home.js'),
 	controllerVideo=require('../controllers/controller_video.js'),
 	controllerPost=require('../controllers/controller_post'),
+	controllerUser=require('../controllers/controller_user'),
 	path = require('path');
 router.prefix(`/${baseApi}`)
 router.post('/register', register) //注册
@@ -61,8 +62,8 @@ Object.values(ctx.request.files).forEach(item => {
 	.post('/postUnlike',  controllerPost.postUnlike) // 取消点赞
 	.get('/getUserPostLike', controllerPost.getUserPostLike) // 获取用户点赞动态
 	.post('/createComment', controllerPost.createComment) // 发送评论
-	
-	
+	.get('/findDataByUserId', verify, controllerUser.findDataByUserId) // 通过用户id查找用户信息 users 包括密码
+	.post('/setAvator', controllerUser.setAvator) // 修改头像
 
 console.log("router");
 

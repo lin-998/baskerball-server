@@ -64,6 +64,7 @@ Object.values(ctx.request.files).forEach(item => {
 	.post('/createComment', controllerPost.createComment) // 发送评论
 	.get('/findDataByUserId', verify, controllerUser.findDataByUserId) // 通过用户id查找用户信息 users 包括密码
 	.post('/setAvator', controllerUser.setAvator) // 修改头像
+	.get('/getAllPost', controllerPost.getAllPost) // 获取所有动态
 
 console.log("router");
 

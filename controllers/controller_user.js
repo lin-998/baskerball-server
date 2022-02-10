@@ -19,9 +19,10 @@ class userController{
 		ctx.id = payload.id;
 		   const RowDataPacket=	await userModel.findDataByUserId(ctx.id)
          const rowData = JSON.parse(JSON.stringify(RowDataPacket));
+		 
 		   ctx.body = {
 			   code:200,
-			   data:RowDataPacket
+			   data:RowDataPacket[0]
 		   };
 	   } catch (error) {
 		   console.log(error);

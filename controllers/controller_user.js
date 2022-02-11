@@ -11,10 +11,9 @@ const secret = require("../config").secret;
 class userController{
 	  async findDataByUserId(ctx, next) {
       try {
-         	// 同步验证
+         	 //解码取出之前存在payload的user_id 和 name
 	const auth = ctx.get('Authorization')
 	const token = auth.split(' ')[1];
-         //解码取出之前存在payload的user_id 和 name
 		const payload = jwt.verify(token, secret)
 		ctx.id = payload.id;
 		   const RowDataPacket=	await userModel.findDataByUserId(ctx.id)
@@ -31,11 +30,12 @@ class userController{
 		   };
 	   }
    };
+   //设置用户头像
    async setAvator(ctx, next) {
       const id=ctx.request.body.id
-      const avator=ctx.request.body.avator
+      const avator=ctx.request.body.background
       try {
-		   const RowDataPacket=	await userModel.setAvator([avator,id])
+		   const RowDataPacket=	await userModel.setBackImage([avator,id])
          const rowData = JSON.parse(JSON.stringify(RowDataPacket));
 		   ctx.body = {
 			   code:200,
@@ -49,6 +49,25 @@ class userController{
 		   };
 	   }
    };
+   //设置用户背景图片
+   async setBackImage(ctx, next) {
+	const id=ctx.request.body.id
+	const background=ctx.request.body.background
+	try {
+		 const RowDataPacket=	await userModel.setAvator([background,id])
+	   const rowData = JSON.parse(JSON.stringify(RowDataPacket));
+		 ctx.body = {
+			 code:200,
+			 data: rowData
+		 };
+	 } catch (error) {
+		 console.log(error);
+		 ctx.body = {
+			 code:500,
+			 data: null
+		 };
+	 }
+ }; 
   
   
 }

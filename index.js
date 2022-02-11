@@ -31,13 +31,16 @@ app.use(router.routes()).use(router.allowedMethods());
 global.query = query;
 
 io.on("connection", socket => {
+  
   const socketId = socket.id;
   //登录
   socket.on("login", async userId => {
+   
     await socketModel.saveUserSocketId(userId, socketId);
   });
   // 更新soketId
   socket.on("update", async userId => {
+    
     await socketModel.saveUserSocketId(userId, socketId);
   });
   //私聊

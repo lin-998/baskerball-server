@@ -17,7 +17,7 @@ const { query } = require("../utils/db");
 let getPrivateDetail = (from_user,to_user)=>{
     const data = [from_user,to_user,to_user,from_user]
     const _sql =  
-    'select p.from_user,p.to_user, p.message ,p.time ,i.avator , i.name ,i.status  from private__msg as p  inner join user_info as i  on p.from_user = i.id  where  (p.from_user = ? AND p.to_user   = ? )  or (p.from_user = ? AND p.to_user   = ? )  order by time '
+    'select p.from_user,p.to_user, p.message ,p.time ,i.avator , i.name   from private__msg as p  inner join users as i  on p.from_user = i.id  where  (p.from_user = ? AND p.to_user   = ? )  or (p.from_user = ? AND p.to_user   = ? )  order by time '
     return query(_sql, data);
 }
 

@@ -1,3 +1,5 @@
+const { select } = require('async');
+const { from } = require('form-data');
 const {
 	query
 } = require('../utils/db');
@@ -17,7 +19,7 @@ let getPrivateList = function(user_id) {
     (SELECT p.message  FROM private__msg AS p
     WHERE (p.to_user = r.other_user_id and p.from_user = r.user_id) or  (p.from_user = r.other_user_id and p.to_user = r.user_id)  ORDER BY p.time DESC   LIMIT 1 )  AS message ,
     (SELECT p.time  FROM private__msg AS p  WHERE  (p.to_user = r.other_user_id and p.from_user = r.user_id) or  (p.from_user = r.other_user_id and p.to_user = r.user_id)   ORDER BY p.time DESC   LIMIT 1 )  AS time
-    FROM  user_user_relation AS r  inner join user_info AS i on r.other_user_id  = i.id   WHERE r.user_id = ?  `
+    FROM  user_user_relation AS r  inner join users AS i on r.other_user_id  = i.id   WHERE r.user_id = ?  `
 	return query(_sql, user_id)
 }
 
@@ -25,3 +27,4 @@ module.exports = {
 	getGroupList,
 	getPrivateList
 }
+`select u.name,u.avator from users as u inner join private__msg as m on u.id=m.to_user where u.id=m.from_user ,`

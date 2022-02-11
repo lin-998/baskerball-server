@@ -27,7 +27,13 @@ let findUIByName = function(name) {
 let setAvator=function(value) {
 	let _sql = "UPDATE  users SET avator= ? WHERE id = ? ;"
 	return query(_sql, value)
+} 
+//修改用户背景图片
+let setBackImage=function(value) {
+	let _sql = "UPDATE  users SET background= ? WHERE id = ? ;"
+	return query(_sql, value)
 }
+
 //修改我的信息
 let editorInfo = function(data) {
 	let _sql = ' UPDATE  users SET github = ?,website = ?,sex = ?,place = ? WHERE id = ? ; '
@@ -103,5 +109,6 @@ module.exports = {
 	editorInfo,
 	findDataByUserId,
 	DataByName,
-	setAvator
+	setAvator,
+	setBackImage
 }

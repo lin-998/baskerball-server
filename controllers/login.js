@@ -3,6 +3,7 @@ const secret = require("../config").secret;
 const userModel = require("../models/user_info");
 const md5 = require("md5");
 module.exports = async (ctx, next) => {
+	console.log(22)
 	let name = ctx.request.body.name || "",
 		password = ctx.request.body.password || "";
 	if (name === "" || password === "") {

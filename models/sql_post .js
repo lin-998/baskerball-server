@@ -9,6 +9,11 @@ class postSql {
         let _sql = "insert into posts(post_id,post_content,user_id,post_url) values(?,?,?,?);"
         return query(_sql, value)
     }
+     //获取所有动态
+     getAllPost(value) {
+        let _sql = "select v.*, u.avator as avator, u.nickname as nickname from posts v left join users u on v.user_id = u.id;"
+        return query(_sql, value)
+    }
     //点赞
     postLike(value) {
         let _sql = "UPDATE `posts` SET  `like_counts` =`like_counts` +1 WHERE `post_id` = ?;"

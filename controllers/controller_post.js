@@ -5,6 +5,7 @@ const {uuid}=require('../utils/createId')
  * @return
  */
 class postController{
+	//发布动态
 	  async createPost(ctx, next) {
 		// 1. 获取数据(user_id, content)
 	   //  console.log(ctx)
@@ -27,6 +28,22 @@ class postController{
 		   };
 	   }
    };
+   //获取动态
+   async getAllPost(ctx, next) {
+   try {
+	   const RowDataPacket = await postModel.getAllPost()
+	   ctx.body = {
+		   code:200,
+		   data:RowDataPacket
+	   };
+   } catch (error) {
+	   console.log(error);
+	   ctx.body = {
+		   code:500,
+		   data: null
+	   };
+   }
+};
    //动态点赞
    async postLike(ctx, next)  {
 	  //  console.log(ctx.params)
@@ -98,7 +115,7 @@ class postController{
 		const { post_id, content,to_user_id,from_user_id } = ctx.request.body;
 		
 		// 2. 将数据插入到数据库的comment表中
-		const result = await postModel.createComment([uuidv4(),to_user_id,post_id,from_user_id,content,new Date()]);
+		const result = await postModel.createComment([uuid(),to_user_id,post_id,from_user_id,content,new Date()]);
 		ctx.body = result;
 	  }
 	  // 回复评论

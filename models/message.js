@@ -27,4 +27,4 @@ module.exports = {
 	getGroupList,
 	getPrivateList
 }
-`select u.name,u.avator from users as u inner join private__msg as m on u.id=m.to_user where u.id=m.from_user ,`
+//`select u.name,u.avator,m.message,m.time from users as u inner join private__msg as m on u.id=m.from_user where where u.id=? `

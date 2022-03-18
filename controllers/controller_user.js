@@ -34,9 +34,9 @@ class userController{
    //设置用户头像
    async setAvator(ctx, next) {
       const id=ctx.request.body.id
-      const avator=ctx.request.body.background
+      const avator=ctx.request.body.avator
       try {
-		   const RowDataPacket=	await userModel.setBackImage([avator,id])
+		   const RowDataPacket=	await userModel.setAvator([avator,id])
          const rowData = JSON.parse(JSON.stringify(RowDataPacket));
 		   ctx.body = {
 			   code:200,
@@ -55,7 +55,7 @@ class userController{
 	const id=ctx.request.body.id
 	const background=ctx.request.body.background
 	try {
-		 const RowDataPacket=	await userModel.setAvator([background,id])
+		 const RowDataPacket=	await userModel.setBackImage([background,id])
 	   const rowData = JSON.parse(JSON.stringify(RowDataPacket));
 		 ctx.body = {
 			 code:200,
